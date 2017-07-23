@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <style type="text/css">
+      .child{
+        height: 100px;
+        width: 200px;
+        display: inline-block;
+      }
+      li{
+        list-style: none;
+        display: inline-block;
+      }
+    </style>
+</head>
+
+<body>
+    <button id="name">DEMO1</button>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Parent extends React.Component{ 
+          constructor(props) {
+            super(props);
+            this.state={
+              background: ''
+            };
+            this.child1ChangeColor=this.child1ChangeColor.bind(this);
+            this.child2ChangeColor=this.child2ChangeColor.bind(this);
+            this.changeColor=this.changeColor.bind(this);
+          }
+          child1ChangeColor(e) {
+            this.refs['child1'].changeColor(e)
+          }
+          child2ChangeColor(e) {
+            this.refs['child2'].changeColor(e)
+          }
+          changeColor(e) {
+            this.setState({background: $(e.target).css("background-color")});
+          }
+          render() { 
+            return (
+              <div className="parent" style={{background: this.state.background}}>
+                  <br/>
+                  <ul className="list-inline">
+                      <li>对应第一个child</li>
+                      <li><button style={{background:"#286090"}} onClick={this.child1ChangeColor}>&nbsp;</button></li>
+                      <li><button href="#" style={{background:"#31b0d5"}} onClick={this.child1ChangeColor}>&nbsp;</button></li>
+                      <li><button href="#" style={{background:"#c9302c"}} onClick={this.child1ChangeColor}>&nbsp;</button></li>
+                      <li><button href="#" style={{background:"#ec971f"}} onClick={this.child1ChangeColor}>&nbsp;</button></li>
+                      <li><button href="#" style={{background:"#e6e6e6"}} onClick={this.child1ChangeColor}>&nbsp;</button></li>
+                  </ul>
+                  <ul className="list-inline">
+                      <li>对应第二个child</li>
+                      <li><button href="#" style={{background:"#286090"}} onClick={this.child2ChangeColor}>&nbsp;</button></li>
+                      <li><button href="#" style={{background:"#31b0d5"}} onClick={this.child2ChangeColor}>&nbsp;</button></li>
+                      <li><button href="#" style={{background:"#c9302c"}} onClick={this.child2ChangeColor}>&nbsp;</button></li>
+                      <li><button href="#" style={{background:"#ec971f"}} onClick={this.child2ChangeColor}>&nbsp;</button></li>
+                      <li><button href="#" style={{background:"#e6e6e6"}} onClick={this.child2ChangeColor}>&nbsp;</button></li>
+                  </ul>
+                  <hr/>
+                  <Child ref="child1" parentChangeColor={this.changeColor}></Child>
+                  <Child ref="child2" parentChangeColor={this.changeColor}></Child>
+              </div>
+            ) 
+          } 
+        } 
+
+        class Child extends React.Component{
+          constructor(props) {
+            super(props);
+            this.state={
+              background: ''
+            };
+            this.changeColor=this.changeColor.bind(this);
+          }
+          changeColor(e) {
+            this.setState({background: $(e.target).css("background-color")});
+          }
+          render() {
+            return (
+              <div className="child" style={{background: this.state.background}}>
+                <ul className="list-inline">
+                  <li><button href="#" style={{background:"#286090"}} onClick={this.props.parentChangeColor}>&nbsp;</button></li>
+                  <li><button href="#" style={{background:"#31b0d5"}} onClick={this.props.parentChangeColor}>&nbsp;</button></li>
+                  <li><button href="#" style={{background:"#c9302c"}} onClick={this.props.parentChangeColor}>&nbsp;</button></li>
+                  <li><button href="#" style={{background:"#ec971f"}} onClick={this.props.parentChangeColor}>&nbsp;</button></li>
+                  <li><button href="#" style={{background:"#e6e6e6"}} onClick={this.props.parentChangeColor}>&nbsp;</button></li>
+                  </ul>
+              </div>
+            )
+          }
+        } 
+        ReactDOM.render(
+          <Parent />, 
+          document.getElementById('root') 
+        );
+    </script>
+</body>
+
+</html>

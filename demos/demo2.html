@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style type="text/css">
+      #name{
+        background: #5bc0de;
+        color: white;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="name">DEMO1</button>
+    <div id="root"></div>
+    <script type="text/babel">
+      class Text extends React.Component {
+        render(){
+          return (
+            <div className="text">
+              hello, this is rendered by React! age={this.props.age}
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(
+        <Text name="text" age={11}/>,
+        document.getElementById('root')
+      );
+    </script>
+  </body>
+</html>

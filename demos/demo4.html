@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <style type="text/css">
+      #name{
+        background: #5bc0de;
+        color: white;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="name">DEMO1</button>
+    <div id="root"></div>
+    <script type="text/babel">
+      class Text extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            username: '',
+            lastGistUrl: '',
+            dateTime: ''
+          }
+          this.request = this.request.bind(this);
+        }
+
+        request() {
+          $.ajax({
+            type: 'get',
+            url: this.props.url,
+            success: function(result){
+              var lastGist = result[0];
+              this.setState({
+                username: lastGist.owner.login,
+                lastGistUrl: lastGist.html_url,
+                dateTime: new Date().getTime()
+              });
+            }.bind(this)
+          });
+        }
+        componentDidMount() {
+          setInterval(this.request, 1000)
+        }
+
+        render(){
+          return (
+            <div className="text">
+              {this.state.username}用户最新的Gist地址为：
+              <a href={this.state.lastGistUrl}>{this.state.lastGistUrl}</a>
+              <div>{this.state.dateTime}</div>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(
+        <Text url="https://api.github.com/users/octocat/gists"/>,
+        document.getElementById('root')
+      );
+    </script>
+  </body>
+</html>
