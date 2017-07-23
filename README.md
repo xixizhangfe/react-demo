@@ -1,6 +1,6 @@
 
 > * demo from official website是来自官网文档中的demo，自己练习用的，请参考https://facebook.github.io/react/docs/hello-world.html
-> * demos是5个react实例，参考http://blog.csdn.net/iambinger/article/details/51803606，感谢作者
+> * demos是5个react实例，参考http://blog.csdn.net/iambinger/article/details/51803606
 > * 下面只讲述5个react的实例，虽然仅有5个，但在常用的开发中，几乎会包含大部分的情况，只要熟练掌握这5个demo，相信一定会解决大部分问题。
 
 
