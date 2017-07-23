@@ -22,14 +22,14 @@
         render(){
           return (
             <div className="text">
-              hello, this is rendered by React! age={this.props.age}
+              hello, this is rendered by {this.props.name}! age={this.props.age}
             </div>
           )
         }
       }
 
       ReactDOM.render(
-        <Text name="text" age={11}/>,
+        <Text name="React" age={11}/>,
         document.getElementById('root')
       );
     </script>
